@@ -68,7 +68,8 @@ public class MetadataServlet extends HttpServlet {
     }
 
     private String getProperties(String key) throws IOException {
-        String value = System.getProperty(key);
+        String value = System.getenv(key);
+
         if(value == null) {
             if(this.props == null) {
                 this.props = new Properties();
@@ -105,6 +106,8 @@ public class MetadataServlet extends HttpServlet {
             return;
         }
 
+        LOGGER.info("MetadataServlet request, serviceName={}, version={}", serviceName, version);
+
         try {
 
             Service service = getService(serviceName, version);
@@ -112,9 +115,12 @@ public class MetadataServlet extends HttpServlet {
                     .stream().map(struct -> "'" + struct.namespace + "." + struct.name + "'")
                     .collect(Collectors.joining(",", "(" ,")"));
 
+            LOGGER.info(this.url);
+
             Class.forName(this.driverClassName);
             this.conn = DriverManager.getConnection(this.url, this.username, this.password);
             String sql = "SELECT * FROM metadb.fields WHERE `struct_name` in " + structsSqlIn;
+            LOGGER.info(sql);
             this.stmt = this.conn.createStatement();
             this.rs = this.stmt.executeQuery(sql);
 
