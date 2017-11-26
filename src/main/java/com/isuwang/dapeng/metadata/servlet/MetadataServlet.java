@@ -169,7 +169,25 @@ public class MetadataServlet extends HttpServlet {
     }
 
     private Service getService(String serviceName, String version) throws SoaException {
-        String metaXml = new MetadataClient(serviceName, version).getServiceMetadata();
+        List<String> lines = new ArrayList<>();
+        try {
+            InputStream is = Class.forName(serviceName).getClassLoader().getResourceAsStream(serviceName + ".xml");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is,"utf-8"));
+            String line = br.readLine();
+            while (line != null) {
+                lines.add(line);
+                line = br.readLine();
+            }
+
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e.getMessage());
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        String metaXml = String.join("", lines);
         StringReader reader = new StringReader(metaXml);
         return JAXB.unmarshal(reader, Service.class);
     }
