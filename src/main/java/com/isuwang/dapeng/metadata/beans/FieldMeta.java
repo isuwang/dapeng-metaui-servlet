@@ -77,12 +77,12 @@ ui元素，缺省时，会根据datatype和dataTypeExtra，提供默认ui：h2-t
 多否多选，true | false
 
     **/
-    public boolean mutil ;
-    public boolean getMutil(){ return this.mutil; }
-    public void setMutil(boolean mutil){ this.mutil = mutil; }
+    public boolean multi ;
+    public boolean getMuiti(){ return this.multi; }
+    public void setMulti(boolean mutil){ this.multi = mutil; }
 
-    public boolean mutil(){ return this.mutil; }
-    public FieldMeta mutil(boolean mutil){ this.mutil = mutil; return this; }
+    public boolean multi(){ return this.multi; }
+    public FieldMeta multi(boolean multi){ this.multi = multi; return this; }
 
     /**
     *
@@ -313,7 +313,7 @@ public String toString(){
 stringBuilder.append("\"").append("name").append("\":\"").append(this.name).append("\",");
 stringBuilder.append("\"").append("label").append("\":\"").append(this.label).append("\",");
 stringBuilder.append("\"").append("required").append("\":").append(this.required).append(",");
-stringBuilder.append("\"").append("mutil").append("\":").append(this.mutil).append(",");
+stringBuilder.append("\"").append("mutil").append("\":").append(this.multi).append(",");
 stringBuilder.append("\"").append("format").append("\":\"").append(this.format).append("\",");
 stringBuilder.append("\"").append("editable").append("\":").append(this.editable).append(",");
 stringBuilder.append("\"").append("validate").append("\":").append(this.validate).append(",");
