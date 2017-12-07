@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.isuwang.dapeng.core.SoaException;
 import com.isuwang.dapeng.core.metadata.Service;
 import com.isuwang.dapeng.metadata.beans.FieldMeta;
 import com.isuwang.dapeng.metadata.beans.MetaDto;
@@ -153,9 +152,6 @@ public class MetadataServlet extends HttpServlet {
             LOGGER.error(e.getMessage());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
-        } catch (SoaException e) {
-            LOGGER.error(e.getMessage());
-            throw new ServletException(e.getMessage());
         }
     }
 
@@ -167,7 +163,7 @@ public class MetadataServlet extends HttpServlet {
         this.stmt = null;
     }
 
-    private Service getService(String serviceName, String version) throws SoaException {
+    protected Service getService(String serviceName, String version) {
         List<String> lines = new ArrayList<>();
         try {
             InputStream is = Class.forName(serviceName).getClassLoader().getResourceAsStream(serviceName + ".xml");
