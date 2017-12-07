@@ -152,6 +152,8 @@ public class MetadataServlet extends HttpServlet {
             LOGGER.error(e.getMessage());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -163,7 +165,7 @@ public class MetadataServlet extends HttpServlet {
         this.stmt = null;
     }
 
-    protected Service getService(String serviceName, String version) {
+    protected Service getService(String serviceName, String version) throws Exception {
         List<String> lines = new ArrayList<>();
         try {
             InputStream is = Class.forName(serviceName).getClassLoader().getResourceAsStream(serviceName + ".xml");
