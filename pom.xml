@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.isuwang</groupId>
     <artifactId>dapeng-metaui-servlet</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <properties>
         <org.springframework-version>4.2.0.RELEASE</org.springframework-version>
@@ -27,8 +27,8 @@
 
         <dependency>
             <groupId>com.isuwang</groupId>
-            <artifactId>dapeng-remoting-api</artifactId>
-            <version>1.2.1</version>
+            <artifactId>dapeng-core</artifactId>
+            <version>1.2.2</version>
         </dependency>
 
         <dependency>

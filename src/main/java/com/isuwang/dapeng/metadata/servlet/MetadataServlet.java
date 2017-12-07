@@ -19,7 +19,6 @@ import com.isuwang.dapeng.metadata.beans.FieldMeta;
 import com.isuwang.dapeng.metadata.beans.MetaDto;
 import com.isuwang.dapeng.metadata.util.GsonBooleanAdapter;
 import com.isuwang.dapeng.metadata.util.MetadataUtils;
-import com.isuwang.dapeng.remoting.fake.metadata.MetadataClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
