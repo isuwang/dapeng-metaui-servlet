@@ -1,25 +1,14 @@
 package com.isuwang.dapeng.metadata.servlet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.isuwang.dapeng.code.parser.ThriftCodeParser;
-import com.isuwang.dapeng.core.SoaException;
 import com.isuwang.dapeng.core.metadata.Service;
-import com.isuwang.dapeng.metadata.beans.FieldMeta;
-import com.isuwang.dapeng.metadata.beans.MetaDto;
-import com.isuwang.dapeng.metadata.util.GsonBooleanAdapter;
-import com.isuwang.dapeng.metadata.util.MetadataUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXB;
 import java.io.*;
-import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -40,18 +29,27 @@ public class MetadataServlet4Debug extends MetadataServlet {
 
     @Override
     protected Service getService(String serviceName, String version) throws Exception {
-        String[] resources = (String[]) Arrays.asList(new File(this.thriftIn).listFiles((dir, name) -> name.endsWith(".thrift")))
+
+        File[] files = new File(this.thriftIn).listFiles((dir, name) -> name.endsWith(".thrift"));
+        String[] resources = new String[files.length];
+
+        Arrays.asList(files)
                 .stream()
                 .map(File::getAbsolutePath)
-                .collect(Collectors.toList()).toArray();
+                .collect(Collectors.toList()).toArray(resources);
 
         List<Service> found = new ThriftCodeParser("java").toServices(resources, "1.0.0")
                 .stream()
                 .filter(service -> (service.namespace + "." + service.name).equals(serviceName))
                 .collect(Collectors.toList());
-        if(found.size() == 0) {
+        if (found.size() == 0) {
             throw new Exception("Service not found: " + serviceName);
         }
-        return found.get(0);
+
+        // so stupid,  this.gson.toJson(found.get(0).getStructDefinitions()) return [null,null ...] ???
+        ByteArrayOutputStream xml = new ByteArrayOutputStream();
+        JAXB.marshal(found.get(0), xml);
+        InputStream in = new ByteArrayInputStream(xml.toByteArray());
+        return JAXB.unmarshal(in, Service.class);
     }
 }
