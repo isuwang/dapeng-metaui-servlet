@@ -148,12 +148,10 @@ public class MetadataServlet extends HttpServlet {
             this.rs.close();
             this.stmt.close();
             this.conn.close();
-        } catch (ClassNotFoundException e) {
-            LOGGER.error(e.getMessage());
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+            resp.setStatus(500);
+            out.write("Server error: " + e.getMessage());
         }
     }
 

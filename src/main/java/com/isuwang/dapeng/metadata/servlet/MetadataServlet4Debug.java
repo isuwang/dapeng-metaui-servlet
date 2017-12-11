@@ -25,6 +25,7 @@ public class MetadataServlet4Debug extends MetadataServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.thriftIn = config.getInitParameter("thriftIn");
+        LOGGER.info("MetadataServlet4Debug thriftIn = {}", this.thriftIn);
     }
 
     @Override
