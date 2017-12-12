@@ -32,12 +32,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.isuwang</groupId>
-            <artifactId>dapeng-code-generator</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${org.slf4j-version}</version>
