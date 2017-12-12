@@ -61,7 +61,7 @@ public class MetadataServlet extends HttpServlet {
             this.password = this.getProperties("DB_METADB_PASSWD");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("MetadataServlet init Error: {}", e.getMessage());
         }
     }
 
