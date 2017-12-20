@@ -25,6 +25,11 @@ public class MetadataServlet4Debug extends MetadataServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.thriftIn = config.getInitParameter("thriftIn");
+
+        if (this.thriftIn == null) {
+            throw new ServletException("init-param[thriftIn] not config");
+        }
+
         LOGGER.info("MetadataServlet4Debug thriftIn = {}", this.thriftIn);
     }
 
@@ -32,6 +37,11 @@ public class MetadataServlet4Debug extends MetadataServlet {
     protected Service getService(String serviceName, String version) throws Exception {
 
         File[] files = new File(this.thriftIn).listFiles((dir, name) -> name.endsWith(".thrift"));
+
+        if (files == null) {
+            throw new Exception("no thrift found in " + this.thriftIn);
+        }
+
         String[] resources = new String[files.length];
 
         Arrays.asList(files)
