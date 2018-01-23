@@ -45,9 +45,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.isuwang</groupId>
-            <artifactId>dapeng-core</artifactId>
-            <version>1.2.4</version>
+	    <groupId>com.github.dapeng</groupId>
+     	    <artifactId>dapeng-core</artifactId>
+	    <version>2.0.0</version>
         </dependency>
 
         <dependency>
