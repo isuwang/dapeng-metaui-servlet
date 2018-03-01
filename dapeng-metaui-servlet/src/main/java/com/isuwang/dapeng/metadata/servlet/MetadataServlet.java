@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.isuwang.dapeng.core.metadata.Service;
+import com.github.dapeng.core.metadata.Service;
 import com.isuwang.dapeng.metadata.beans.FieldMeta;
 import com.isuwang.dapeng.metadata.beans.MetaDto;
 import com.isuwang.dapeng.metadata.util.GsonBooleanAdapter;
