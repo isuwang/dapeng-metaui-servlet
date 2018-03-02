@@ -1,6 +1,6 @@
 package com.isuwang.dapeng.metadata.beans;
 
-import com.isuwang.dapeng.core.metadata.Service;
+import com.github.dapeng.core.metadata.Service;
 
 import java.util.List;
 import java.util.Map;
